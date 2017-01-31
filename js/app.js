@@ -1,52 +1,51 @@
-import {Todo} from './todo'
+document.getElementById('issueInputForm').addEventListener('submit',saveIssue)
 
-export class App {
-  constructor() {
-    this.heading = 'Add shit that needs to be done'
-    this.firstName = "Peter"
-    this.lastName = "Kona"
-    this.todos = []
-    this.todoDescription = ''
-    this.neweArr = []
-    this.arr = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-    this.arrCopy = [110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+function saveIssue(e) {
+  var issueDesc = document.getElementById('issueDescInput').value
+  var issueSeverity = document.getElementById('issueSeverityInput').value
+  var issueAssignedTo = document.getElementById('issueAssignedToInput').value
+  var issueId = chance.guid()
+  var issueStatus = 'Open'
 
+  var issue = {
+    id: issueId,
+    description: issueDesc,
+    severity: issueSeverity,
+    assignedTo: issueAssignedTo,
+    status: issueStatus
   }
 
-  addTodo() {
-    if(this.todoDescription) {
-      this.todos.push(new Todo(this.todoDescription))
-      this.todoDescription = ''
-    }
+  if(localStorage.getItem('issues') == null) {
+    var issues = []
+    issues.push(issue)
+    localStorage.setItem('issues', JSON.stringify(issues))
+  } else {
+    var issues = JSON.parse(localStorage.getItem('issues'))
+    issues.push(issue)
+    localStorage.setItem('issues', JSON.stringify(issues))
   }
 
-  removeTodo(todo) {
-    let index = this.todos.indexOf(todo)
-    if (index !== -1) {
-      this.todos.splice(index,1)
-    }
-  }
+document.getElementById('issueInputForm').reset()
+  fetchIssues()
+  e.preventDefault()
+}
 
-  addTwo(a,b){
-    return a + b
-  }
+function fetchIssues() {
+  var issues = JSON.parse(localStorage.getItem('issues'))
+  var issuesList = document.getElementById('issuesList')
 
-  newFunct(arr){
-    console.log('this is pop ',arr.pop());
-    console.log('this is shift ',arr.shift());
-    console.log('this is my array',arr);
-  }
+  issuesList.innerHTML = ''
 
-  newArr(arr,arrCopy){
-    arr.concat(arrCopy)
-    console.log('arr copy',arr, arrCopy);
-  }
+  for (var i = 0; i < issues.length; i++) {
+    var id =issues[i].id
+    var desc = issues[i].desc
+    var severity = issues[i].severity
+    var assignedTo = issues[i].assignedTo
+    var status = issues[i].status
 
-  get fullName() {
-    return `$(this.lastName) ${this.firstName}`
-  }
 
-  sayHello() {
-    alert(`Hello ${this.fullName}`)
+    issuesList.innerHTML += '<div class="well">' +
+                            '<h6>Issue ID:' + id + '</h6>'+ '<p> <span class = "label label-info">' + status + '</span></p>' + '<h3>' + desc + '</h3>' + '<p><span class="glyphicon-time"></span>' + severity + '</p>' + '<p><span class="glyphicon-user"></span>' + assignedTo + '<p>' + '<a href="#" onclick="setStatusClosed(\''+id+'\')" class="btn btn-warning">Close</a>' + '<a href="#" onclick="deleteIssue(\''+id+'\')" class="btn btn-danger">Delete</a>'+
+'</div>'
   }
 }
