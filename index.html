@@ -14,34 +14,41 @@
   <!-- Then include bootstrap js -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <!-- Latest compiled and minified JavaScript -->
+  <style>
+    html {
+      background: url(img/b5.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height: 800px;
+    }
+
+    body {
+      background: url(img/bS.jpg) no-repeat;
+      height: 400px;
+    }
+
+    a.btn.btn-primary.center {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      width: 250px;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Issue Tracker<small> @issuetracker</small></h1>
-    <hr>
-    <div class="jumbotron">
-      <h3>Add New Issue:</h3>
-      <form id="issueInputForm">
-        <div class="form-group"> <label for="issueDecsInput">Description</label> <input type="text" class="form-control" id="issueDescInput" placeholder="Describe the issue ....."> </div>
-        <div class="form-group"> <label for="issueAssignedToInput">Assigned To</label> <input type="text" class="form-control" id="issueAssignedToInput" placeholder="Assigned to ...." placeholder="Describe the issue ....."> </div>
-        <div class="form-group"> <label for="issueSeverityInput">Severity</label> <select id="issueSeverityInput" class="form-control">
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select> </div>
-        <div class="form-group"> <label for="issueAssignedToInput">Assigned To</label> <input type="text" class="form-control" id="issueAssignedToInput" placeholder="Enter the name ....."> </div> <button type="submit" class="btn btn-primary">Submit</button> </form>
-    </div>
-    <div class="col-lg-12">
-      <div id="issuesList">
-        <div class="footer">
-          <p>&copy peterkona.com</p>
-        </div>
-      </div>
-    </div>
+    <h1>Tracker<small>@trackjobs</small></h1> <br><br>
+    <p> Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. </p> <br> <a href="front.html" target="_blank" <button type="submit" class="btn btn-primary center">Enter into the magic</button>
+</a>
+    <p> Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. </p>
   </div>
-  <script src="js/app.js"></script>
-  <script src="js/chance.js"></script>
+  </div>
+  <footer>
+    <p>&copy <a href="http://peterkona.com" target="_blank">peterkona.com</a></p>
+  </footer>
 </body>
 
 </html>
