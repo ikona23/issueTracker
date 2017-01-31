@@ -1,6 +1,6 @@
 document.getElementById('issueInputForm').addEventListener('submit',saveIssue)
 
-function createdTime(){
+function createdTime(d){
   var d = new Date()
   return d
   console.log(d);
@@ -8,20 +8,23 @@ function createdTime(){
 
 function saveIssue(e) {
   var issueDesc = document.getElementById('issueDescInput').value
-  var issueTimeAtTo = document.getElementById('createdTime').value
+  var issueTimeAtTo = document.getElementById('createdTime()')
   var issueSeverity = document.getElementById('issueSeverityInput').value
   var issueAssignedTo = document.getElementById('issueAssignedToInput').value
   var issueId = chance.guid()
   var issueStatus = 'Open'
 
+
   var issue = {
-    createdTime: issueTimeAtTo,
+    createdTime: createdTime(),
     id: issueId,
     description: issueDesc,
     severity: issueSeverity,
     assignedTo: issueAssignedTo,
     status: issueStatus
   }
+
+  console.log(issue)
 
   if(localStorage.getItem('issues') == null) {
     var issues = []
@@ -40,7 +43,7 @@ document.getElementById('issueInputForm').reset()
 
 
 
-document.getElementById('createdTime')
+
 console.log(createdTime());
 
 function fetchIssues() {
@@ -55,7 +58,7 @@ function fetchIssues() {
     var severity = issues[i].severity
     var assignedTo = issues[i].assignedTo
     var status = issues[i].status
-    var createdAt = issues[i].createdAt
+    var createdAt = issues[i].createdTime
 // ?/
 
 issuesList.innerHTML +=   '<div class="well">'+
