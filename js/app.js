@@ -1,7 +1,7 @@
 document.getElementById('issueInputForm').addEventListener('submit',saveIssue)
 
 function createdTime(d){
-  var d = new Date()
+  var d = new Date().getTime();
   return d
   console.log(d);
 }
@@ -41,12 +41,34 @@ document.getElementById('issueInputForm').reset()
   e.preventDefault()
 }
 
-console.log(createdTime());
+console.log(createdTime())
+
+function setStatusClosed(id) {
+  var issues = JSON.parse(localStorage.getItem('issues'))
+  for (var i = 0; i < issues.length; i++) {
+   if (issues[i].id == id){
+     issues[i].status = 'Closed'
+    }
+  }
+  localStorage.setItem('issues', JSON.stringify(issues))
+  fetchIssues()
+    console.log("this is close button", + " "+ issues);
+}
+function setStatusDelete(id) {
+  var issues = JSON.parse(localStorage.getItem('issues'))
+  for (var i = 0; i < issues.length; i++) {
+   if (issues[i].id == id){
+     issues.splice(i,1)
+    }
+  }
+  localStorage.setItem('issues', JSON.stringify(issues))
+  fetchIssues()
+    console.log("this is close button", + " "+ issues);
+}
 
 function fetchIssues() {
   var issues = JSON.parse(localStorage.getItem('issues'))
   var issuesList = document.getElementById('issuesList')
-
   issuesList.innerHTML = ''
 
   for (var i = 0; i < issues.length; i++) {
@@ -56,7 +78,6 @@ function fetchIssues() {
     var assignedTo = issues[i].assignedTo
     var status = issues[i].status
     var createdAt = issues[i].createdTime
-// ?/
 
 issuesList.innerHTML +=   '<div class="well">'+
                           '<h6>Issue ID: ' + id + '</h6>'+
@@ -66,7 +87,7 @@ issuesList.innerHTML +=   '<div class="well">'+
                           '<p><span class="glyphicon glyphicon-time"></span> ' + severity + '</p>'+
                           '<p><span class="glyphicon glyphicon-user"></span> ' + assignedTo + '</p>'+
                           '<a href="#" onclick="setStatusClosed(\''+id+'\')" class="btn btn-warning">Close</a> '+
-                          '<a href="#" onclick="deleteIssue(\''+id+'\')" class="btn btn-danger">Delete</a>'+
+                          '<a href="#" onclick="setStatusDelete(\''+id+'\')" class="btn btn-danger">Delete</a>'+
                           '</div>';
 }
 }
