@@ -7,8 +7,8 @@ function createdTime(d){
 }
 
 function saveIssue(e) {
-  var issueDesc = document.getElementById('issueDescInput').value
   var issueTimeAtTo = document.getElementById('createdTime()')
+  var issueDesc = document.getElementById('issueDescInput').value
   var issueSeverity = document.getElementById('issueSeverityInput').value
   var issueAssignedTo = document.getElementById('issueAssignedToInput').value
   var issueId = chance.guid()
@@ -41,9 +41,6 @@ document.getElementById('issueInputForm').reset()
   e.preventDefault()
 }
 
-
-
-
 console.log(createdTime());
 
 function fetchIssues() {
@@ -54,7 +51,7 @@ function fetchIssues() {
 
   for (var i = 0; i < issues.length; i++) {
     var id =issues[i].id
-    var desc = issues[i].desc
+    var desc = issues[i].description
     var severity = issues[i].severity
     var assignedTo = issues[i].assignedTo
     var status = issues[i].status
